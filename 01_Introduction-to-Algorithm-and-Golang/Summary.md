@@ -1,6 +1,6 @@
 # Summary 
 
-## 01 - Introduction to Algorithm and Golang
+## (01) Introduction to Algorithm and Golang
 
 ### Definisi dan konsep dasar Algoritma
 

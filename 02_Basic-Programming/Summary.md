@@ -1,6 +1,6 @@
 # Summary 
 
-## Basic Programming
+## (2) Basic Programming
 
 ### Introduction to Golang
 - History of Golang <br>
