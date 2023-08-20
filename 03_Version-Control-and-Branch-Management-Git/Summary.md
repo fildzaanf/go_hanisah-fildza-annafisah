@@ -141,7 +141,7 @@ $ git branch -d new-feature
 ### Workflow Collaboration
 - Buat beberapa branch untuk kolaborasi diantaranya sebagai berikut.
     - Master  
-    - Develop 
+    - Development 
     - Feature 
 - Cara mengoptimalkan kolaborasi dalam development
     - Buat branch Master dari branch Development
@@ -164,10 +164,10 @@ $ git branch -d new-feature
 
         ```
     - Merge branch Development ke branch Master jika development sudah selesai
-    ```
-    $ (master) git merge development
-    
-    ```
+        ```
+        $ (master) git merge development
+
+        ```
 
 
 
