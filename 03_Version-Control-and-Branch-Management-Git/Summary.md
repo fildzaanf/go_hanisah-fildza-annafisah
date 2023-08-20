@@ -12,9 +12,9 @@
 ### Repo Hosting Services
 - Repo Hosting Services adalah platform yang dapat melacak perubahan, mengelola branch, menggabungkan (merge) kode, dan menyimpan serta mengelola repository Git secara online yang menggunakan penyimpanan berbasis cloud sehingga mempermudah developer dalam berkolaborasi membuat aplikasi
 - Repo Hosting Services yang dapat digunakan oleh developer diantaranya sebagai berikut.
- - GitHub
- - GitLab
- - BitBucket
+    - GitHub
+    - GitLab
+    - BitBucket
 
 ### Git
 #### Perintah dan Fungsi pada Git
