@@ -18,29 +18,39 @@ type Chiper interface {
 
 func (s *student) Encode() string {
 	var nameEncode = ""
-	s.name = strings.ToLower(s.name)
+	char := strings.Split("abcdefghijklmnopqrstuvwxyz", "")
+	encodeChar := strings.Split("zyxwvutsrqponmlkjihgfedcba", "")
+	charSplit := strings.Split(string(s.name), "")
+	tempChar := []string{}
 
-	for _, char := range s.name {
-		if char >= 'a' && char <= 'z' {
-			nameEncode += string('a' + (char-'a'+3)%26)
-		} else {
-			nameEncode += string(char)
+	for _, split := range charSplit {
+		for j, character := range char {
+			if split == character {
+				tempChar = append(tempChar, encodeChar[j])
+			}
 		}
 	}
+
+	nameEncode = strings.Join(tempChar, "")
 	return nameEncode
 }
 
 func (s *student) Decode() string {
 	var nameDecode = ""
-	s.name = strings.ToLower(s.name)
+	char := strings.Split("abcdefghijklmnopqrstuvwxyz", "")
+	decodeChar := strings.Split("zyxwvutsrqponmlkjihgfedcba", "")
+	charSplit := strings.Split(string(s.name), "")
+	tempChar := []string{}
 
-	for _, char := range s.name {
-		if char >= 'a' && char <= 'z' {
-			nameDecode += string('a' + (char-'a'-3+26)%26)
-		} else {
-			nameDecode += string(char)
+	for _, split := range charSplit {
+		for j, character := range char {
+			if split == character {
+				tempChar = append(tempChar, decodeChar[j])
+			}
 		}
 	}
+
+	nameDecode = strings.Join(tempChar, "")
 	return nameDecode
 }
 
