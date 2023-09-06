@@ -43,7 +43,7 @@
         ```
     - TRUNCATE digunakan untuk menghapus semua baris dari tabel, tetapi tetap mempertahankan struktur tabel itu sendiri. Truncate lebih cepat daripada DROP karena tidak perlu membangun ulang tabel
         ```sql
-         TRUNCATE TABLE table_name;
+        TRUNCATE TABLE table_name;
         ```
 ### DML (Data Manipulation Language)
 - DML (Data Manipulation Language) digunakan untuk mengelola atau memanipulasi data dalam tabel dalam database
