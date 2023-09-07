@@ -38,6 +38,7 @@
 
 ### Union
 - Union adalah operasi dalam SQL yang digunakan untuk menggabungkan hasil dari dua atau lebih pernyataan SELECT menjadi satu hasil tunggal
+
         ```sql
         SELECT column1, column2 FROM table1
         UNION
@@ -95,6 +96,7 @@
 ### Subquery
 - Subquery atau Inner query atau Nested query adalah query di dalam query SQL lain
 - Subquey digunakan untuk mengembalikan data yang akan digunakan dalam query utama sebagai syarat untuk lebih membatasi data yang akan diambil
+
         ```sql
         (SELECT [DISTINCT] subquery_select_argument
         FROM {table_name | view_name}
@@ -107,6 +109,7 @@
 
 ### Function 
 - Function adalah sebuah kumpulan statement yang akan mengembalikan sebuah nilai balik pada pemanggilnya
+
         ```sql
         DELIMITER //
 
