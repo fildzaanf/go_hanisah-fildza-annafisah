@@ -15,10 +15,14 @@
     - gunakan konvensi
     - formatting
 
+---
+
 ### Why Clean Code 
 - Work Collaboration
 - Feature Development
 - Faster development
+
+---
 
 ### Clean Code Principle
 

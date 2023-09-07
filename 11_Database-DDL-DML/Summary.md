@@ -10,6 +10,8 @@
     - Many to Many
 - Tipe data MySQL : num, huruf, dan date
 
+---
+
 ### DDL (Data Definition Language)
 - DDL (Data Definition Language) digunakan untuk mendefinisikan, mengelola, dan mengubah struktur objek dalam database
 - Pernyataan DDL mengenai struktur data dalam database
@@ -45,6 +47,8 @@
         ```sql
         TRUNCATE TABLE table_name;
         ```
+---
+
 ### DML (Data Manipulation Language)
 - DML (Data Manipulation Language) digunakan untuk mengelola atau memanipulasi data dalam tabel dalam database
 - Pernyataan DML fokus pada operasi seperti menambah, mengubah, menghapus, dan mengambil data dari tabel
@@ -107,6 +111,7 @@
         ```sql
         SELECT * FROM table_name LIMIT 10;
         ```
+---
 
 ### DCL (Data Control Language)
 - DCL (Data Control Language) digunakan untuk mengelola hak akses dan izin dalam database
