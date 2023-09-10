@@ -36,7 +36,7 @@ CREATE TABLE product_types(
     product_name VARCHAR(50) NOT NULL,
     product_type_category VARCHAR(100) NOT NULL,
     product_stock INT(100) NOT NULL,
-    product_price FLOAT NOT NULL,
+    product_price FLOAT NOT NULL
 );
 
 DROP TABLE IF EXISTS product_descriptions;
@@ -62,9 +62,8 @@ CREATE TABLE products(
     FOREIGN KEY (product_type_id) REFERENCES product_types(product_type_id) ON DELETE CASCADE  
     ON UPDATE CASCADE,
     FOREIGN KEY (product_desc_id) REFERENCES product_descriptions(product_desc_id) ON DELETE CASCADE  
-    ON UPDATE CASCADE,
+    ON UPDATE CASCADE
 ); 
-
 
 DROP TABLE IF EXISTS payment_methods;
 CREATE TABLE payment_methods(
