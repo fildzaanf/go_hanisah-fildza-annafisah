@@ -15,20 +15,17 @@ Tap for details [UCD](https://drive.google.com/file/d/1R24EimbW6N4U9EPIf1aVtms0M
 ```sql
 SELECT * FROM users;
 ```
----
 
 ### Redis
 ```r
 SCAN 0 MATCH users:* 
 ```
----
 
 ### Neo4j
 ```
 MATCH (u:Users)
 RETURN u
 ```
----
 
 ### Cassandra
 ```cs
