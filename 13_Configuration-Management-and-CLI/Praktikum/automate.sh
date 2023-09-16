@@ -36,7 +36,7 @@ curl "https://gist.githubusercontent.com/tegarimansyah/e91f335753ab2c7fb12815779
 
 # menulis file about_this_laptop.txt berisikan nama user dan uname -a 
 echo "my username : $username" > "$main_directory/my_system_info/about_this_laptop.txt"
-echo "with host : $host" > "$main_directory/my_system_info/about_this_laptop.txt"
+echo "with host : $host" >> "$main_directory/my_system_info/about_this_laptop.txt"
 
 # menulis file internet_connection.txt berisikan hasil keluaran ping ke google.com sebanyak 3 kali
 ping -c 3 google.com > "$main_directory/my_system_info/internet_connection.txt"
