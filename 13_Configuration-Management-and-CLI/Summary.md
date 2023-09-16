@@ -26,12 +26,11 @@
 me@linuxbox:~$
 
 ```
-keterangan 
-    - me : username
-    - linuxbox : hostname
-    - ~ : current path (home)
-    - $ : shell for normal username
-    - # : shell for root user
+ - me : username
+ - linuxbox : hostname
+ - (~) : current path (home)
+ - ($) : shell for normal username
+ - (#) : shell for root user
 
 ### Normal User vs Root User
 - Normal User = allowed to manupulating /home/username dir only
