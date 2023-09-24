@@ -76,7 +76,7 @@ func DeleteBookController(c echo.Context) error {
 		})
 	}
 
-	if err := config.DB.First(&book, id).Error; err != nil {
+	if err := config.DB.First(&books, id).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, map[string]interface{}{
 			"messages": "book not found",
 		})

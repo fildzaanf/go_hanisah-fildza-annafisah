@@ -1,6 +1,7 @@
 package main
 
 import (
+	"Praktikum/config"
 	"Praktikum/routes"
 
 	_ "github.com/jinzhu/gorm/dialects/mysql"

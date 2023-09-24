@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"Praktikum/controller"
+	"Praktikum/controllers"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -14,25 +14,25 @@ func New() *echo.Echo {
 	e.Pre(middleware.AddTrailingSlash())
 
 	userGroup := e.Group("/users")
-	userGroup.GET("/", controller.GetUsersController)
-	userGroup.GET("/:id/", controller.GetUserController)
-	userGroup.POST("/", controller.CreateUserController)
-	userGroup.DELETE("/:id/", controller.DeleteUserController)
-	userGroup.PUT("/:id/", controller.UpdateUserController)
+	userGroup.GET("/", controllers.GetUsersController)
+	userGroup.GET("/:id/", controllers.GetUserController)
+	userGroup.POST("/", controllers.CreateUserController)
+	userGroup.DELETE("/:id/", controllers.DeleteUserController)
+	userGroup.PUT("/:id/", controllers.UpdateUserController)
 
 	bookGroup := e.Group("/books")
-	bookGroup.GET("/", controller.GetBooksController)
-	bookGroup.GET("/:id/", controller.GetBookController)
-	bookGroup.POST("/", controller.CreateBookController)
-	bookGroup.DELETE("/:id/", controller.DeleteBookController)
-	bookGroup.PUT("/:id/", controller.UpdateBookController)
+	bookGroup.GET("/", controllers.GetBooksController)
+	bookGroup.GET("/:id/", controllers.GetBookController)
+	bookGroup.POST("/", controllers.CreateBookController)
+	bookGroup.DELETE("/:id/", controllers.DeleteBookController)
+	bookGroup.PUT("/:id/", controllers.UpdateBookController)
 
 	blogGroup := e.Group("/blogs")
-	blogGroup.GET("/", controller.GetBlogsController)
-	blogGroup.GET("/:id/", controller.GetBlogController)
-	blogGroup.POST("/", controller.CreateBlogController)
-	blogGroup.DELETE("/:id/", controller.DeleteBlogController)
-	blogGroup.PUT("/:id/", controller.UpdateBlogController)
+	blogGroup.GET("/", controllers.GetBlogsController)
+	blogGroup.GET("/:id/", controllers.GetBlogController)
+	blogGroup.POST("/", controllers.CreateBlogController)
+	blogGroup.DELETE("/:id/", controllers.DeleteBlogController)
+	blogGroup.PUT("/:id/", controllers.UpdateBlogController)
 
 	return e
 }

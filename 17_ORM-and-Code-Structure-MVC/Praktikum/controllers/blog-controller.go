@@ -17,6 +17,31 @@ func GetBlogsController(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
+	for i, blog := range blogs {
+
+		var user models.User
+
+		if err := config.DB.First(&user, blog.UserId).Error; err != nil {
+			return echo.NewHTTPError(http.StatusInternalServerError, "failed to get user data")
+		}
+		blogs[i].User = models.User{Name: user.Name}
+	}
+
+	var responsBlogs []map[string]interface{}
+	for _, blog := range blogs {
+
+		user := map[string]interface{}{
+			"name": blog.User.Name,
+		}
+
+		responsBlogs = append(responsBlogs, map[string]interface{}{
+			"ID":      blog.ID,
+			"Title":   blog.Title,
+			"Content": blog.Content,
+			"User":    user,
+		})
+	}
+
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"message": "success get all blogs",
 		"blogs":   blogs,
@@ -41,31 +66,6 @@ func GetBlogController(c echo.Context) error {
 		})
 	}
 
-	for i, blog := range blogs {
-
-		var user models.User
-
-		if err := config.DB.First(&user, blog.UserID).Error; err != nil {
-			return echo.NewHTTPError(http.StatusInternalServerError, "failed to get user data")
-		}
-		blogs[i].User = models.User{Name: user.Name}
-	}
-
-	var responsBlogs []map[string]interface{}
-	for _, blog := range blogs {
-
-		user := map[string]interface{}{
-			"name": blog.User.Name,
-		}
-
-		responsBlogs = append(responsBlogs, map[string]interface{}{
-			"ID":      blog.ID,
-			"Title":   blog.Title,
-			"Content": blog.Content,
-			"User":    user,
-		})
-	}
-
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"messages": "success get blog",
 		"blog":     blog,
@@ -81,7 +81,7 @@ func CreateBlogController(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
-	if err := config.DB.First(&user, blog.UserID).Error; err != nil {
+	if err := config.DB.First(&user, blog.UserId).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, "invalid user ID")
 	}
 
@@ -156,7 +156,7 @@ func UpdateBlogController(c echo.Context) error {
 	blogs.Title = blog.Title
 	blogs.Content = blog.Content
 
-	if err := config.DB.Save(&blogs).Error; err != nill {
+	if err := config.DB.Save(&blogs).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 

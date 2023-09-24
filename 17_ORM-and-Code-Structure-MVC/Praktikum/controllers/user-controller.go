@@ -72,7 +72,7 @@ func DeleteUserController(c echo.Context) error {
 		})
 	}
 
-	if err := config.DB.First(&user, id).Error; err != nil {
+	if err := config.DB.First(&users, id).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, map[string]interface{}{
 			"messages": "user not found",
 		})
