@@ -1,13 +1,12 @@
 package main
 
-import{
-	"Praktikum/configs"
+import (
 	"Praktikum/routes"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/labstack/echo/v4"
-}
 
-func main(){
+	_ "github.com/jinzhu/gorm/dialects/mysql"
+)
+
+func main() {
 	config.InitDB()
 	e := routes.New()
 	e.Logger.Fatal(e.Start(":8000"))

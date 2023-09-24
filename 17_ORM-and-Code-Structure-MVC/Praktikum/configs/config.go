@@ -1,10 +1,5 @@
 package configs
 
-import{
-	"github.com/labstack/echo/v4"
-}
-
-
 type Config struct {
 	DB_Username string
 	DB_Password string

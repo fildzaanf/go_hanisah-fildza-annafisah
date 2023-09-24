@@ -1,9 +1,9 @@
 package models
 
-import{
-	"github.com/jinzhu/gorm"
+import (
 	_ "github.com/go-sql-driver/mysql"
-}
+	"github.com/jinzhu/gorm"
+)
 
 type User struct {
 	gorm.Model
@@ -12,4 +12,3 @@ type User struct {
 	Password string `json:"password" form:"password"`
 	Blogs    []Blog `gorm:"ForeignKey:UserId;references:id"`
 }
-  

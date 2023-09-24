@@ -1,11 +1,12 @@
 package configs
 
-import{
-	"fmt"
+import (
 	"Praktikum/models"
+	"fmt"
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-}
+)
 
 var DB *gorm.DB
 
@@ -24,7 +25,7 @@ func InitDB() {
 		config.DB_Port,
 		config.DB_Name,
 	)
-	
+
 	var err error
 	DB, err = gorm.Open("mysql", connectionString)
 	if err != nil {

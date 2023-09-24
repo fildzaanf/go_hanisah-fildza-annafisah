@@ -1,16 +1,16 @@
 package routes
 
-import{
+import (
 	"praktikum/controller"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-}
+)
 
 func New() *echo.Echo {
 
 	e := echo.New()
-	
+
 	e.Pre(middleware.AddTrailingSlash())
 
 	userGroup := e.Group("/users")
@@ -20,14 +20,12 @@ func New() *echo.Echo {
 	userGroup.DELETE("/:id/", controller.DeleteUserController)
 	userGroup.PUT("/:id/", controller.UpdateUserController)
 
-
 	bookGroup := e.Group("/books")
 	bookGroup.GET("/", controller.GetBooksController)
 	bookGroup.GET("/:id/", controller.GetBookController)
 	bookGroup.POST("/", controller.CreateBookController)
 	bookGroup.DELETE("/:id/", controller.DeleteBookController)
 	bookGroup.PUT("/:id/", controller.UpdateBookController)
-	
 
 	blogGroup := e.Group("/blogs")
 	blogGroup.GET("/", controller.GetBlogsController)
