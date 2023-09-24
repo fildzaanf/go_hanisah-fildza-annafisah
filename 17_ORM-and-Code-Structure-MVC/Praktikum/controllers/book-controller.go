@@ -50,7 +50,7 @@ func GetBookController(c echo.Context) error {
 func CreateBookController(c echo.Context) error {
 	book := models.Book{}
 
-	if err := c.Bind(book); err != nil {
+	if err := c.Bind(&book); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
@@ -108,7 +108,7 @@ func UpdateBookController(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
-	if err := config.DB.First(books, id).Error; err != nil {
+	if err := config.DB.First(&books, id).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, map[string]interface{}{
 			"messages": "book not found",
 		})

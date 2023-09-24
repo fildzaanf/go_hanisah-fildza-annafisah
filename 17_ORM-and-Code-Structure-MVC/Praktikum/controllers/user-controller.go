@@ -48,10 +48,13 @@ func GetUserController(c echo.Context) error {
 
 // create new user
 func CreateUserController(c echo.Context) error {
-	user := models.User{}
-	c.Bind(&user)
+	user := &models.User{}
 
-	if err := config.DB.Save(&user).Error; err != nil {
+	if err := c.Bind(user); err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	if err := config.DB.Save(user).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 	return c.JSON(http.StatusOK, map[string]interface{}{
@@ -112,12 +115,12 @@ func UpdateUserController(c echo.Context) error {
 	users.Email = user.Email
 	users.Password = user.Password
 
-	if err := config.DB.Save(&user).Error; err != nil {
+	if err := config.DB.Save(&users).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"message": "success updated user",
-		"user":    user,
+		"user":    users,
 	})
 }

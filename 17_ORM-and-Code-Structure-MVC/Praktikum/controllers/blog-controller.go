@@ -13,33 +13,8 @@ import (
 func GetBlogsController(c echo.Context) error {
 	var blogs []models.Blog
 
-	if err := config.DB.Find(&blogs).Error; err != nil {
+	if err := config.DB.Preload("User").Find(&blogs).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
-	}
-
-	for i, blog := range blogs {
-
-		var user models.User
-
-		if err := config.DB.First(&user, blog.UserId).Error; err != nil {
-			return echo.NewHTTPError(http.StatusInternalServerError, "failed to get user data")
-		}
-		blogs[i].User = models.User{Name: user.Name}
-	}
-
-	var responsBlogs []map[string]interface{}
-	for _, blog := range blogs {
-
-		user := map[string]interface{}{
-			"name": blog.User.Name,
-		}
-
-		responsBlogs = append(responsBlogs, map[string]interface{}{
-			"ID":      blog.ID,
-			"Title":   blog.Title,
-			"Content": blog.Content,
-			"User":    user,
-		})
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
@@ -60,7 +35,7 @@ func GetBlogController(c echo.Context) error {
 		})
 	}
 
-	if err := config.DB.First(&blog, id).Error; err != nil {
+	if err := config.DB.Preload("User").First(&blog, id).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, map[string]interface{}{
 			"messages": "blog not found",
 		})
@@ -77,7 +52,7 @@ func CreateBlogController(c echo.Context) error {
 	blog := models.Blog{}
 	var user models.User
 
-	if err := c.Bind(blog); err != nil {
+	if err := c.Bind(&blog); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
@@ -85,20 +60,15 @@ func CreateBlogController(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest, "invalid user ID")
 	}
 
-	if err := config.DB.Create(blog).Error; err != nil {
+	blog.User = user
+
+	if err := config.DB.Create(&blog).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
-	username := user.Name
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"message": "success create new blog",
-		"blog": map[string]interface{}{
-			"title":   blog.Title,
-			"content": blog.Content,
-			"user": map[string]interface{}{
-				"name": username,
-			},
-		},
+		"blog":    blog,
 	})
 
 }
@@ -132,8 +102,7 @@ func DeleteBlogController(c echo.Context) error {
 
 // update blog by id
 func UpdateBlogController(c echo.Context) error {
-	var blogs models.Blog
-	blog := new(models.Blog)
+	var blog models.Blog
 
 	idString := c.Param("id")
 	id, err := strconv.Atoi(idString)
@@ -143,25 +112,22 @@ func UpdateBlogController(c echo.Context) error {
 		})
 	}
 
-	if err := c.Bind(blog); err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
-	}
-
-	if err := config.DB.First(&blogs, id).Error; err != nil {
+	if err := config.DB.Preload("User").First(&blog, id).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, map[string]interface{}{
 			"messages": "blog not found",
 		})
 	}
 
-	blogs.Title = blog.Title
-	blogs.Content = blog.Content
+	if err := c.Bind(&blog); err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
 
-	if err := config.DB.Save(&blogs).Error; err != nil {
+	if err := config.DB.Save(&blog).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"messages": "success update blog",
-		"blog":     blogs,
+		"blog":     blog,
 	})
 }

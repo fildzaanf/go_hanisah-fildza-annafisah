@@ -10,5 +10,5 @@ type Blog struct {
 	UserId  uint   `json:"userid" form:"userid"`
 	Title   string `json:"title" form:"title"`
 	Content string `json:"content" form:"content"`
-	User    User
+	User    User   `gorm:"foreignkey:UserId"`
 }
