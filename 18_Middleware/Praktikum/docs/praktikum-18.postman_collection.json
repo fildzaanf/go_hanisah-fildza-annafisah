@@ -13,7 +13,24 @@
 					"name": "get-all-users",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTU3NzAzNzAsIm5hbWUiOiJGaWxkemEiLCJ1c2VySWQiOjN9.Xzy7HEZtCoRlB_DgTVzZ-ADYNguxBm9YTTe25KAC5ws",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users"
+							]
+						}
 					},
 					"response": []
 				},
@@ -21,7 +38,26 @@
 					"name": "get-user-by-id",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTU3NzAzNzAsIm5hbWUiOiJGaWxkemEiLCJ1c2VySWQiOjN9.Xzy7HEZtCoRlB_DgTVzZ-ADYNguxBm9YTTe25KAC5ws",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/users/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"3"
+							]
+						}
 					},
 					"response": []
 				},
@@ -29,7 +65,25 @@
 					"name": "delete-user-by-id",
 					"request": {
 						"method": "DELETE",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTU3NzAzNzAsIm5hbWUiOiJGaWxkemEiLCJ1c2VySWQiOjN9.Xzy7HEZtCoRlB_DgTVzZ-ADYNguxBm9YTTe25KAC5ws",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -37,7 +91,34 @@
 					"name": "update-user-by-id",
 					"request": {
 						"method": "PUT",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTU3NzAzNzAsIm5hbWUiOiJGaWxkemEiLCJ1c2VySWQiOjN9.Xzy7HEZtCoRlB_DgTVzZ-ADYNguxBm9YTTe25KAC5ws",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Fildza\",\r\n    \"email\" : \"Fildza@gmail.com\",\r\n    \"password\" : \"newpass123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/users/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"users",
+								"3"
+							]
+						}
 					},
 					"response": []
 				},
@@ -113,7 +194,24 @@
 					"name": "get-all-books",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTU3NzAzNzAsIm5hbWUiOiJGaWxkemEiLCJ1c2VySWQiOjN9.Xzy7HEZtCoRlB_DgTVzZ-ADYNguxBm9YTTe25KAC5ws",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"books"
+							]
+						}
 					},
 					"response": []
 				},
@@ -121,7 +219,25 @@
 					"name": "get-book-by-id",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTU3NzAzNzAsIm5hbWUiOiJGaWxkemEiLCJ1c2VySWQiOjN9.Xzy7HEZtCoRlB_DgTVzZ-ADYNguxBm9YTTe25KAC5ws",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/books/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"books",
+								"3"
+							]
+						}
 					},
 					"response": []
 				},
@@ -129,7 +245,33 @@
 					"name": "create-new-book",
 					"request": {
 						"method": "POST",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTU3NzAzNzAsIm5hbWUiOiJGaWxkemEiLCJ1c2VySWQiOjN9.Xzy7HEZtCoRlB_DgTVzZ-ADYNguxBm9YTTe25KAC5ws",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Harry Potter and the Chamber of Secrets\",\r\n    \"author\": \"J.K. Rowling\",\r\n    \"publisher\": \"Media Book\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/books",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"books"
+							]
+						}
 					},
 					"response": []
 				},
@@ -137,7 +279,25 @@
 					"name": "delete-book-by-id",
 					"request": {
 						"method": "DELETE",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTU3NzAzNzAsIm5hbWUiOiJGaWxkemEiLCJ1c2VySWQiOjN9.Xzy7HEZtCoRlB_DgTVzZ-ADYNguxBm9YTTe25KAC5ws",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/books/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"books",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
@@ -145,7 +305,34 @@
 					"name": "update-book-by-id",
 					"request": {
 						"method": "PUT",
-						"header": []
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTU3NzAzNzAsIm5hbWUiOiJGaWxkemEiLCJ1c2VySWQiOjN9.Xzy7HEZtCoRlB_DgTVzZ-ADYNguxBm9YTTe25KAC5ws",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Harry Potter and the Chamber of Secrets\",\r\n    \"author\": \"J.K. Rowling\",\r\n    \"publisher\": \"Hello Book\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/books/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"books",
+								"3"
+							]
+						}
 					},
 					"response": []
 				}
