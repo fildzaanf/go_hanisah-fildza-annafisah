@@ -1,6 +1,6 @@
 # Summary
 
-## (17) Middleware
+## (18) Middleware
 
 ### Middleware
 - Middleware adalah perangkat lunak atau kode yang digunakan untuk memproses permintaan HTTP di antara permintaan masuk dan respon yang keluar dari server web atau perangkat lunak
@@ -118,7 +118,7 @@
     )
 
     func AuthMiddleware() echo.MiddlewareFunc {
-        
+
         return middleware.BasicAuth(func(username, password string, c echo.Context) (bool, error) {
            
             if username == constants.ValidUsername && password == constants.ValidPassword {
