@@ -84,7 +84,7 @@ func DeleteBlogController(c echo.Context) error {
 	}
 
 	if err := service.GetBlogRepository().DeleteBlogController(id); err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, map[string]interface{}{
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"message": err.Error(),
 		})
 	}
@@ -96,7 +96,11 @@ func DeleteBlogController(c echo.Context) error {
 
 // update blog by id
 func UpdateBlogController(c echo.Context) error {
-	var blog models.Blog
+
+	blog := models.Blog{}
+	if err := c.Bind(&blog); err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
 
 	idString := c.Param("id")
 	id, err := strconv.Atoi(idString)
@@ -107,13 +111,12 @@ func UpdateBlogController(c echo.Context) error {
 	}
 
 	if err := service.GetBlogRepository().UpdateBlogController(&blog, id); err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, map[string]interface{}{
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"message": err.Error(),
 		})
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"messages": "success update blog",
-		"blog":     blog,
 	})
 }

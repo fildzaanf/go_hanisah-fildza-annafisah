@@ -15,9 +15,6 @@ func New() *echo.Echo {
 
 	middlewares.AddTrailingSlash(e)
 	middlewares.Logger(e)
-	middlewares.RateLimiter(e)
-	middlewares.Recover(e)
-	middlewares.CORS(e)
 
 	JWT := middleware.JWT([]byte(constants.SECRET_JWT))
 

@@ -14,46 +14,6 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-// get all users valid
-func TestGetUsersControllerValid(t *testing.T) {
-
-	userRepository := &service.UserRepositoryMock{Mock: mock.Mock{}}
-	service.SetUserRepository(userRepository)
-
-	userRepository.Mock.On("GetUsersController").Return(nil)
-
-	e := echo.New()
-
-	request := httptest.NewRequest(http.MethodGet, "/users/", nil)
-	request.Header.Set("content-type", "application/json")
-	response := httptest.NewRecorder()
-	c := e.NewContext(request, response)
-
-	GetUsersController(c)
-
-	assert.Equal(t, http.StatusOK, response.Code)
-}
-
-// get all users invalid
-func TestGetUsersControllerInvalid(t *testing.T) {
-
-	userRepository := &service.UserRepositoryMock{Mock: mock.Mock{}}
-	service.SetUserRepository(userRepository)
-
-	userRepository.Mock.On("GetUsersController").Return([]models.User{})
-
-	e := echo.New()
-
-	request := httptest.NewRequest(http.MethodGet, "/users/", nil)
-	request.Header.Set("content-type", "application/json")
-	response := httptest.NewRecorder()
-	c := e.NewContext(request, response)
-
-	GetUsersController(c)
-
-	assert.Equal(t, http.StatusBadRequest, response.Code)
-}
-
 // create new user valid
 func TestCreateUserControllerValid(t *testing.T) {
 
@@ -66,6 +26,7 @@ func TestCreateUserControllerValid(t *testing.T) {
 		Email:    "anna@gmail.com",
 		Password: "pass123",
 	}
+
 	userRepository.Mock.On("CreateUserController", &user).Return(nil)
 
 	e := echo.New()
@@ -103,6 +64,46 @@ func TestCreateUserControllerInvalid(t *testing.T) {
 	c := e.NewContext(request, response)
 
 	CreateUserController(c)
+
+	assert.Equal(t, http.StatusBadRequest, response.Code)
+}
+
+// get all users valid
+func TestGetUsersControllerValid(t *testing.T) {
+
+	userRepository := &service.UserRepositoryMock{Mock: mock.Mock{}}
+	service.SetUserRepository(userRepository)
+
+	userRepository.Mock.On("GetUsersController").Return(nil)
+
+	e := echo.New()
+
+	request := httptest.NewRequest(http.MethodGet, "/users/", nil)
+	request.Header.Set("content-type", "application/json")
+	response := httptest.NewRecorder()
+	c := e.NewContext(request, response)
+
+	GetUsersController(c)
+
+	assert.Equal(t, http.StatusOK, response.Code)
+}
+
+// get all users invalid
+func TestGetUsersControllerInvalid(t *testing.T) {
+
+	userRepository := &service.UserRepositoryMock{Mock: mock.Mock{}}
+	service.SetUserRepository(userRepository)
+
+	userRepository.Mock.On("GetUsersController").Return([]models.User{})
+
+	e := echo.New()
+
+	request := httptest.NewRequest(http.MethodGet, "/users/", nil)
+	request.Header.Set("content-type", "application/json")
+	response := httptest.NewRecorder()
+	c := e.NewContext(request, response)
+
+	GetUsersController(c)
 
 	assert.Equal(t, http.StatusBadRequest, response.Code)
 }
@@ -205,7 +206,7 @@ func TestUpdateUserControllerValid(t *testing.T) {
 	service.SetUserRepository(userRepository)
 
 	user := models.User{
-		Name: "Fildza",
+		Name: "Anna",
 	}
 
 	userRepository.Mock.On("UpdateUserController", &user, 1).Return(nil)
@@ -233,7 +234,7 @@ func TestUpdateUserControllerInvalid(t *testing.T) {
 
 	user := models.User{}
 
-	userRepository.Mock.On("UpdateUserController", &user, 1).Return(nil)
+	userRepository.Mock.On("UpdateUserController", &user, 5).Return(nil)
 
 	e := echo.New()
 	requestData, _ := json.Marshal(user)
@@ -243,7 +244,7 @@ func TestUpdateUserControllerInvalid(t *testing.T) {
 	c := e.NewContext(request, response)
 	c.SetPath("/:id/")
 	c.SetParamNames("id")
-	c.SetParamValues("1")
+	c.SetParamValues("5")
 
 	UpdateUserController(c)
 

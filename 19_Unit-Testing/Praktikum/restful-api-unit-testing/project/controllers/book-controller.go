@@ -40,11 +40,10 @@ func GetBookController(c echo.Context) error {
 	err, res := service.GetBookRepository().GetBookController(id)
 
 	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, map[string]interface{}{
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"message": err.Error(),
 		})
 	}
-
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"messages": "success get book",
 		"book":     res,
@@ -83,7 +82,7 @@ func DeleteBookController(c echo.Context) error {
 	}
 
 	if err := service.GetBookRepository().DeleteBookController(id); err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, map[string]interface{}{
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"message": err.Error(),
 		})
 	}
@@ -111,13 +110,12 @@ func UpdateBookController(c echo.Context) error {
 	}
 
 	if err := service.GetBookRepository().UpdateBookController(&books, id); err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, map[string]interface{}{
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"message": err.Error(),
 		})
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"messages": "success update book",
-		"book":     books,
 	})
 }

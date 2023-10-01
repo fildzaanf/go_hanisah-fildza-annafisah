@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"net/http"
-	"project/config"
 	"project/models"
 	"project/service"
 	"strconv"
@@ -41,8 +40,8 @@ func GetUserController(c echo.Context) error {
 	err, res := service.GetUserRepository().GetUserController(id)
 
 	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, map[string]interface{}{
-			"messages": err.Error(),
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"message": err.Error(),
 		})
 	}
 
@@ -54,13 +53,13 @@ func GetUserController(c echo.Context) error {
 
 // create new user
 func CreateUserController(c echo.Context) error {
-	user := &models.User{}
+	user := models.User{}
 
 	if err := c.Bind(&user); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
-	if err := service.GetUserRepository().CreateUserController(user); err != nil {
+	if err := service.GetUserRepository().CreateUserController(&user); err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"message": err.Error(),
 		})
@@ -84,8 +83,8 @@ func DeleteUserController(c echo.Context) error {
 	}
 
 	if err := service.GetUserRepository().DeleteUserController(id); err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, map[string]interface{}{
-			"messages": err.Error(),
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"message": err.Error(),
 		})
 	}
 
@@ -96,8 +95,8 @@ func DeleteUserController(c echo.Context) error {
 
 // update user by id
 func UpdateUserController(c echo.Context) error {
-	var users models.User
-	user := new(models.User)
+
+	user := models.User{}
 
 	idString := c.Param("id")
 	id, err := strconv.Atoi(idString)
@@ -107,15 +106,13 @@ func UpdateUserController(c echo.Context) error {
 		})
 	}
 
-	if err := c.Bind(user); err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	if err := c.Bind(&user); err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"message": err.Error(),
+		})
 	}
 
-	if err := config.DB.First(&users, id).Error; err != nil {
-		return echo.NewHTTPError(http.StatusNotFound, "user not found")
-	}
-
-	if err := service.GetUserRepository().UpdateUserController(&users, id); err != nil {
+	if err := service.GetUserRepository().UpdateUserController(&user, id); err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"message": err.Error(),
 		})
@@ -123,7 +120,6 @@ func UpdateUserController(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"message": "success updated user",
-		"user":    users,
 	})
 }
 
