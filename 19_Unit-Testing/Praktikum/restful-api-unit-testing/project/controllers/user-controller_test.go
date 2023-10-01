@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"project/models"
+	"project/service"
 	"testing"
 
 	"github.com/labstack/echo/v4"
@@ -264,7 +265,7 @@ func TestLoginUserControllerValid(t *testing.T) {
 
 	e := echo.New()
 	requestData, _ := json.Marshal(user)
-	request := httptest.NewRequest(http.MethodPost, "/login/", bytes.NewReader(requestDataa))
+	request := httptest.NewRequest(http.MethodPost, "/login/", bytes.NewReader(requestData))
 	request.Header.Set("content-type", "application/json")
 	response := httptest.NewRecorder()
 	c := e.NewContext(request, response)

@@ -1,4 +1,4 @@
-package controller
+package controllers
 
 import (
 	"bytes"
@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"project/models"
+	"project/service"
 	"testing"
 
 	"github.com/labstack/echo/v4"
@@ -205,7 +206,7 @@ func TestUpdateBookControllerValid(t *testing.T) {
 	bookRepository.Mock.On("UpdateBookController", &books, 1).Return(nil)
 
 	e := echo.New()
-	requestData, _ := json.Marshal(data)
+	requestData, _ := json.Marshal(books)
 	request := httptest.NewRequest(http.MethodPut, "/books/", bytes.NewReader(requestData))
 	request.Header.Set("content-type", "application/json")
 	response := httptest.NewRecorder()
@@ -229,7 +230,7 @@ func TestUpdateBookControllerInvalid(t *testing.T) {
 	bookRepository.Mock.On("UpdateBookController", &books, 1).Return(nil)
 
 	e := echo.New()
-	requestData, _ := json.Marshal(data)
+	requestData, _ := json.Marshal(books)
 	request := httptest.NewRequest(http.MethodPut, "/books/", bytes.NewReader(requestData))
 	request.Header.Set("content-type", "application/json")
 	response := httptest.NewRecorder()

@@ -9,10 +9,10 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// get all books
-func GetBooksController(c echo.Context) error {
+// get all blogs
+func GetBlogsController(c echo.Context) error {
 
-	err, res := service.GetBookRepository().GetBooksController()
+	err, res := service.GetBlogRepository().GetBlogsController()
 
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
@@ -21,13 +21,13 @@ func GetBooksController(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
-		"message": "success get all books",
-		"books":   res,
+		"message": "success get all blogs",
+		"blogs":   res,
 	})
 }
 
-// get book by id
-func GetBookController(c echo.Context) error {
+// get blog by id
+func GetBlogController(c echo.Context) error {
 
 	idString := c.Param("id")
 	id, err := strconv.Atoi(idString)
@@ -37,42 +37,43 @@ func GetBookController(c echo.Context) error {
 		})
 	}
 
-	err, res := service.GetBookRepository().GetBookController(id)
+	err, res := service.GetBlogRepository().GetBlogController(id)
 
 	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, map[string]interface{}{
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"message": err.Error(),
 		})
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
-		"messages": "success get book",
-		"book":     res,
+		"messages": "success get blog",
+		"blog":     res,
 	})
 }
 
-// create new book
-func CreateBookController(c echo.Context) error {
-	book := models.Book{}
+// create new blog
+func CreateBlogController(c echo.Context) error {
+	blog := models.Blog{}
 
-	if err := c.Bind(&book); err != nil {
+	if err := c.Bind(&blog); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
-	if err := service.GetBookRepository().CreateBookController(&book); err != nil {
+	if err := service.GetBlogRepository().CreateBlogController(&blog); err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"message": err.Error(),
 		})
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
-		"message": "success create new book",
-		"book":    book,
+		"message": "success create new blog",
+		"blog":    blog,
 	})
+
 }
 
-// delete book by id
-func DeleteBookController(c echo.Context) error {
+// delete blog by id
+func DeleteBlogController(c echo.Context) error {
 
 	idString := c.Param("id")
 	id, err := strconv.Atoi(idString)
@@ -82,21 +83,20 @@ func DeleteBookController(c echo.Context) error {
 		})
 	}
 
-	if err := service.GetBookRepository().DeleteBookController(id); err != nil {
+	if err := service.GetBlogRepository().DeleteBlogController(id); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, map[string]interface{}{
 			"message": err.Error(),
 		})
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
-		"messages": "success delete book",
+		"messages": "success delete blog",
 	})
 }
 
-// update book by id
-func UpdateBookController(c echo.Context) error {
-	var books models.Book
-	book := new(models.Book)
+// update blog by id
+func UpdateBlogController(c echo.Context) error {
+	var blog models.Blog
 
 	idString := c.Param("id")
 	id, err := strconv.Atoi(idString)
@@ -106,18 +106,14 @@ func UpdateBookController(c echo.Context) error {
 		})
 	}
 
-	if err := c.Bind(book); err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
-	}
-
-	if err := service.GetBookRepository().UpdateBookController(&books, id); err != nil {
+	if err := service.GetBlogRepository().UpdateBlogController(&blog, id); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, map[string]interface{}{
 			"message": err.Error(),
 		})
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
-		"messages": "success update book",
-		"book":     books,
+		"messages": "success update blog",
+		"blog":     blog,
 	})
 }

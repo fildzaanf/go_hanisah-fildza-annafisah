@@ -3,8 +3,8 @@ package controllers
 import (
 	"net/http"
 	"project/config"
-	"project/middlewares"
 	"project/models"
+	"project/service"
 	"strconv"
 
 	"github.com/labstack/echo/v4"
@@ -12,20 +12,23 @@ import (
 
 // get all users
 func GetUsersController(c echo.Context) error {
-	var users []models.User
 
-	if err := config.DB.Find(&users).Error; err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	err, res := service.GetUserRepository().GetUsersController()
+
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"message": err.Error(),
+		})
 	}
+
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"message": "success get all users",
-		"users":   users,
+		"users":   res,
 	})
 }
 
 // get user by id
 func GetUserController(c echo.Context) error {
-	var user models.User
 
 	idString := c.Param("id")
 	id, err := strconv.Atoi(idString)
@@ -35,15 +38,17 @@ func GetUserController(c echo.Context) error {
 		})
 	}
 
-	if err := config.DB.First(&user, id).Error; err != nil {
+	err, res := service.GetUserRepository().GetUserController(id)
+
+	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, map[string]interface{}{
-			"messages": "user not found",
+			"messages": err.Error(),
 		})
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"messages": "success get user",
-		"user":     user,
+		"user":     res,
 	})
 }
 
@@ -51,13 +56,16 @@ func GetUserController(c echo.Context) error {
 func CreateUserController(c echo.Context) error {
 	user := &models.User{}
 
-	if err := c.Bind(user); err != nil {
+	if err := c.Bind(&user); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
-	if err := config.DB.Save(user).Error; err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	if err := service.GetUserRepository().CreateUserController(user); err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"message": err.Error(),
+		})
 	}
+
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"message": "success create new user",
 		"user":    user,
@@ -66,7 +74,6 @@ func CreateUserController(c echo.Context) error {
 
 // delete user by id
 func DeleteUserController(c echo.Context) error {
-	var users models.User
 
 	idString := c.Param("id")
 	id, err := strconv.Atoi(idString)
@@ -76,14 +83,10 @@ func DeleteUserController(c echo.Context) error {
 		})
 	}
 
-	if err := config.DB.First(&users, id).Error; err != nil {
+	if err := service.GetUserRepository().DeleteUserController(id); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, map[string]interface{}{
-			"messages": "user not found",
+			"messages": err.Error(),
 		})
-	}
-
-	if err := config.DB.Delete(&models.User{}, id).Error; err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
@@ -112,12 +115,10 @@ func UpdateUserController(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusNotFound, "user not found")
 	}
 
-	users.Name = user.Name
-	users.Email = user.Email
-	users.Password = user.Password
-
-	if err := config.DB.Save(&users).Error; err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	if err := service.GetUserRepository().UpdateUserController(&users, id); err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
+			"message": err.Error(),
+		})
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
@@ -131,18 +132,13 @@ func LoginUserController(c echo.Context) error {
 	user := models.User{}
 	c.Bind(&user)
 
-	if err := config.DB.Where("email = ? AND password = ?", user.Email, user.Password).First(&user).Error; err != nil {
-		return c.JSON(http.StatusUnauthorized, map[string]interface{}{
-			"message": "login failed",
-			"error":   err.Error(),
-		})
-	}
+	err, token := service.GetUserRepository().LoginUserController(&user)
 
-	token, err := middlewares.CreateToken(int(user.ID), user.Name)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, map[string]interface{}{
+		return c.JSON(http.StatusBadRequest, map[string]interface{}{
 			"message": "login failed",
 			"error":   err.Error(),
+			"status":  false,
 		})
 	}
 
@@ -151,5 +147,6 @@ func LoginUserController(c echo.Context) error {
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"message": "user login successfully",
 		"user":    userResponse,
+		"status":  true,
 	})
 }
