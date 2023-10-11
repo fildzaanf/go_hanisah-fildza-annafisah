@@ -1,6 +1,6 @@
 # Summary
 
-## (23) Perkenalan AI dan OpenAI
+## (24) Perkenalan AI dan OpenAI
 
 ### Artificial intelligence (AI)
 - Kecerdasan Buatan (AI) adalah bidang ilmu komputer yang dikhususkan untuk memecahkan masalah kognitif yang umumnya terkait dengan kecerdasan manusia, seperti pembelajaran, penciptaan, dan pengenalan gambar
