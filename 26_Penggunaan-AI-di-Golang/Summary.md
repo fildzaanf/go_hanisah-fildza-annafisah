@@ -18,7 +18,7 @@
 - Gorgonia 
     - Memudahkan menulis dan mengevaluasi persamaan matematika yang melibatkan array multidimensi
     - Low-level library, seperti Theano, namun lebih tinggi dibanding Tensorflow
-    - Contoh penerapan :  [Gorgonia] (https://github.com/gorgonia/gorgonia#usage)
+    - Contoh penerapan :  [Gorgonia](https://github.com/gorgonia/gorgonia#usage)
 - Gonum
     - Sebuah set packages yang didesain untuk menulis numerical & algoritma sains menjadi produktif, memiliki performa tinggi, dan scalable
     - Mirip seperti numpy dan spicy, library yang dibuat menggunakan Python
