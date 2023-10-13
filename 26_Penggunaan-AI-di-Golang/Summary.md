@@ -56,7 +56,7 @@
     - Customization
 - Kelemahan menggunakan AI as a Services adalah sebagai berikut.
     - Cost yang berlebih dalam jangka panjang
-    - Privasi dapat
+    - Privasi data
     - Keamanan
     - Transparasi
     - Vendor lock-in
