@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "efc7d353-9400-47da-9ccb-62936348f0e0",
+		"name": "praktikum-26",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29776373"
+	},
+	"item": [
+		{
+			"name": "recommended-laptop",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Budget\" : 10000000,\r\n    \"Purpose\" : \"Design\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/rekomendasi-laptop/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"rekomendasi-laptop",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
